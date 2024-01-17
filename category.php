@@ -49,7 +49,7 @@
 							</div>
 							<div class="content-text">
 								<?php 
-									if(!empty(the_excerpt()) && sizeof(the_excerpt())!==0){
+									if( has_excerpt() ){
 										the_excerpt();
 									}else{
 										echo purdue_get_excerpt(get_the_content());  
@@ -79,7 +79,7 @@
 	</div>
 	<?php if (!has_block('purdue-blocks/anchor-link-navigation')&&!has_block('purdue-blocks/custom-side-menu')) { ?>
 		<button id="to-top" class="to-top-hidden" aria-label="Back to Top Button">
-			<i class="fas fa-chevron-up" aria-hidden="true"></i>
+			<span class="icon"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></span>
 		</button>
 	<?php } ?>
 </main><!-- #site-content -->

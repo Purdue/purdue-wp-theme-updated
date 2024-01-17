@@ -12,6 +12,7 @@
 	<section class="section">
 		<div class="container">
 			<div class="content">
+				<p>Test</p>
 				<h1><?php echo get_bloginfo( 'name' ); ?></h1>
 				<?php if(get_bloginfo( 'description' )){
 							echo '<p>'.get_bloginfo( 'description' ).'</p>'; 
@@ -23,6 +24,7 @@
 	<div class="section post-container">
 		<div class="container">
 			<div class="columns is-multiline">
+				<p>test</p>
 				<?php 
 				$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 				$args = array( 'post_type' => 'post', 'posts_per_page' => 6, 'paged' => $paged);
@@ -51,7 +53,7 @@
 							</div>
 							<div class="content-text">
 								<?php 
-									if(!empty(the_excerpt())){
+									if( has_excerpt() ){
 										the_excerpt();
 									}else{
 										echo purdue_get_excerpt(get_the_content());  
@@ -78,8 +80,8 @@
 	</div>
 	<?php if (!has_block('purdue-blocks/anchor-link-navigation')&&!has_block('purdue-blocks/custom-side-menu')) { ?>
 		<button id="to-top" class="to-top-hidden" aria-label="Back to Top Button">
-			<i class="fas fa-chevron-up" aria-hidden="true"></i>
-		</button>
+			<span class="icon"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></span>
+		</button>		
 	<?php } ?>
 </main><!-- #site-content -->
 

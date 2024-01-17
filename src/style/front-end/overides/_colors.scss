@@ -18,6 +18,7 @@ $gray-footer:#2e2e2e;
 $black-ter:$steel-gray;
 $grey-lighter:#ededed;
 $grey-secondary:#f7f7f7;
+$primary-background-gray:$grey-lighter;
 
 // Color Elements
 $link: $aged-gold;
@@ -106,4 +107,7 @@ $danger: $rush-gold;
 }
 .has-background-black-ter{
     background-color:$steel-gray !important;
+}
+.has-gray-background{
+    background-color: $primary-background-gray !important;
 }

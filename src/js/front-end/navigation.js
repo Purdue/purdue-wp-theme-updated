@@ -1,3 +1,215 @@
+const nav_opens = document.querySelectorAll(".navbar-open");
+const nav_closes = document.querySelectorAll(".navbar-close");
+const body = document.querySelector("html");
+
+const expandSelect = (select) => {
+  select.size = select.options.length;
+  select.classList.add("has-select-expand");
+  select.addEventListener("click", () => {
+    select.size = 1;
+    select.classList.remove("has-select-expand");
+  });
+};
+if (nav_opens && nav_opens.length > 0) {
+  const top_menu = document.querySelector(
+    `[data-menu='${nav_opens[0].dataset.target}']`
+  );
+  nav_opens.forEach((nav_open) => {
+    nav_open.addEventListener("click", () => {
+      if (top_menu) {
+        top_menu.classList.remove("is-hidden");
+        top_menu.classList.add("is-active");
+        body.classList.add("no-scroll");
+        nav_opens.forEach((nav) => {
+          nav.setAttribute("aria-expanded", true);
+          nav.classList.remove("is-active");
+          nav.classList.add("is-hidden");
+        });
+        if (nav_closes && nav_closes.length > 0) {
+          nav_closes.forEach((nav_close) => {
+            nav_close.classList.add("is-active");
+            nav_close.classList.remove("is-hidden");
+          });
+        }
+      }
+    });
+  });
+
+  if (nav_closes && nav_closes.length > 0) {
+    nav_closes.forEach((nav_close) => {
+      nav_close.addEventListener("click", () => {
+        nav_closes.forEach((nav_close) => {
+          nav_close.classList.remove("is-active");
+          nav_close.classList.add("is-hidden");
+        });
+        if (top_menu) {
+          top_menu.classList.remove("is-active");
+          setTimeout(() => {
+            top_menu.classList.add("is-hidden");
+          }, 500);
+
+          body.classList.remove("no-scroll");
+          nav_opens.forEach((nav) => {
+            nav.setAttribute("aria-expanded", false);
+            nav.classList.add("is-active");
+            nav.classList.remove("is-hidden");
+          });
+        }
+      });
+    });
+  }
+}
+const top_nav = document.querySelector(
+  ".purdue-top-nav:not(.purdue-top-nav__first-row)"
+);
+if (top_nav) {
+  var sticky = top_nav.offsetTop;
+  window.addEventListener("scroll", () => {
+    if (window.pageYOffset > sticky) {
+      top_nav.classList.add("is-fixed-top");
+    } else {
+      top_nav.classList.remove("is-fixed-top");
+    }
+  });
+}
+//create accordion buttons
+const collapsedGlobalMenus = document.querySelectorAll(
+  ".navbar-find-info,.purdue-second-nav.desktop-hidden"
+);
+if (collapsedGlobalMenus.length > 0) {
+  collapsedGlobalMenus.forEach((collapsedGlobalMenu) => {
+    let modifier = "top";
+    if (collapsedGlobalMenu.classList.contains("purdue-second-nav")) {
+      modifier = "section";
+    }
+    const accordionHeaders = collapsedGlobalMenu.querySelectorAll(
+      ".navbar-link, .navbar-link-submenu"
+    );
+    if (accordionHeaders.length > 0) {
+      accordionHeaders.forEach((item, index) => {
+        const content = item.nextElementSibling;
+        if (content) {
+          const clonelink = item;
+          if (
+            clonelink.classList.contains("is-active-page") &&
+            window.location.href !== clonelink.href
+          ) {
+            clonelink.classList.remove("is-active-page");
+          }
+          clonelink.classList.remove("navbar-link", "navbar-link-submenu");
+          clonelink.setAttribute("aria-haspopup", "false");
+          const cloneLi = document.createElement("li");
+          cloneLi.classList.add("navbar-item", "cloned-item");
+          cloneLi.appendChild(clonelink);
+          content.insertBefore(cloneLi, content.querySelector("li"));
+          content.id = modifier + "-menu-item-" + index;
+          content.classList.add("hide");
+          const button = document.createElement("button");
+          button.classList.add("accordion__heading");
+          button.innerHTML = item.innerHTML;
+          button.setAttribute("aria-controls", content.id);
+          button.setAttribute("aria-expanded", "false");
+          content.parentElement.insertBefore(button, content);
+        }
+      });
+    }
+    const activePage = collapsedGlobalMenu.querySelector(".is-active-page");
+    if (activePage) {
+      if (
+        activePage.parentElement.parentElement.classList.contains(
+          "navbar-dropdown-submenu"
+        )
+      ) {
+        activePage.parentElement.parentElement.classList.remove("hide");
+        activePage.parentElement.parentElement.classList.add("show");
+        activePage.parentElement.parentElement.previousElementSibling.classList.add(
+          "is-open"
+        );
+        activePage.parentElement.parentElement.previousElementSibling.setAttribute(
+          "aria-expanded",
+          "true"
+        );
+        activePage.parentElement.parentElement.parentElement.parentElement.classList.remove(
+          "hide"
+        );
+        activePage.parentElement.parentElement.parentElement.parentElement.classList.add(
+          "show"
+        );
+        activePage.parentElement.parentElement.parentElement.parentElement.previousElementSibling.setAttribute(
+          "aria-expanded",
+          "true"
+        );
+        activePage.parentElement.parentElement.parentElement.parentElement.previousElementSibling.classList.add(
+          "is-open"
+        );
+      }
+      if (
+        activePage.parentElement.parentElement.classList.contains(
+          "navbar-dropdown"
+        )
+      ) {
+        activePage.parentElement.parentElement.classList.remove("hide");
+        activePage.parentElement.parentElement.classList.add("show");
+        activePage.parentElement.parentElement.previousElementSibling.setAttribute(
+          "aria-expanded",
+          "true"
+        );
+        activePage.parentElement.parentElement.previousElementSibling.classList.add(
+          "is-open"
+        );
+      }
+    }
+  });
+}
+//if anchor link is on the same page, close the menu
+const links = document.querySelectorAll(
+  ".navbar-quick-links a, .navbar-other-links-wrapper a"
+);
+const href = window.location.href.replace(location.hash, "");
+if (links.length > 0) {
+  links.forEach((link) => {
+    if (link.href.includes(href)) {
+      const hash = link.href.replace(href, "");
+      if (hash) {
+        link.addEventListener("click", (e) => {
+          const el = document.querySelector(hash);
+          if (el) {
+            if (nav_opens && nav_opens.length > 0) {
+              const top_menu = document.querySelector(
+                `[data-menu='${nav_opens[0].dataset.target}']`
+              );
+
+              nav_closes.forEach((nav_close) => {
+                nav_close.classList.remove("is-active");
+                nav_close.classList.add("is-hidden");
+              });
+              if (top_menu) {
+                top_menu.classList.remove("is-active");
+                setTimeout(() => {
+                  top_menu.classList.add("is-hidden");
+                }, 500);
+
+                body.classList.remove("no-scroll");
+                nav_opens.forEach((nav) => {
+                  nav.setAttribute("aria-expanded", false);
+                  nav.classList.add("is-active");
+                  nav.classList.remove("is-hidden");
+                });
+              }
+            }
+            const select = el.querySelector("select");
+            if (select) {
+              expandSelect(select);
+            }
+          }
+        });
+      }
+    }
+  });
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
   // set FA to add in icons where used in psuedo elements.
   window.FontAwesomeConfig = {
@@ -5,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-buttons'), 0)
   const $aside = document.querySelector('.side-nav')
   const body= document.querySelector('body')
   // Check if there are any navbar burgers
@@ -20,20 +232,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const $button = document.querySelector('.purdue-navbar-black>.navbar-end')
         const expanded = el.getAttribute('aria-expanded') === 'false' ? true : false
         const hamburgerIcon = el.querySelector('.burger-icon')
-        const closeIcon = el.querySelector('.close-icon')
+        const closeIcon = el.querySelector('img.close-icon')
         el.setAttribute('aria-expanded', expanded)
         // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
         el.classList.toggle('is-active')
-        if(hamburgerIcon.getAttribute('class').indexOf('is-hide') > -1){
-          hamburgerIcon.setAttribute('class', hamburgerIcon.getAttribute('class').replace('is-hide', ''));
-        }else{
-            hamburgerIcon.setAttribute('class', hamburgerIcon.getAttribute('class') + ' is-hide');
-        }
-        if(closeIcon.getAttribute('class').indexOf('is-active') > -1){
+          if(hamburgerIcon.getAttribute('class').indexOf('is-hide') > -1){
+            hamburgerIcon.setAttribute('class', hamburgerIcon.getAttribute('class').replace('is-hide', ''));
+          }else{
+              hamburgerIcon.setAttribute('class', hamburgerIcon.getAttribute('class') + ' is-hide');
+          }     
+       if(closeIcon.getAttribute('class').indexOf('is-active') > -1){
+        console.log(true);
             closeIcon.setAttribute('class', closeIcon.getAttribute('class').replace('is-active', ''));
         }else{
             closeIcon.setAttribute('class', closeIcon.getAttribute('class') + ' is-active');
-        }  
+        }
         if ($aside) {
           $aside.classList.toggle('is-active')
         }
@@ -108,33 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let navSublinks=[];
   let navContents=[];
   let width = window.innerWidth
-  if(siteName){
-    siteNameButton=siteName.querySelector('.accordion__heading')
-    globalNavContent = document.querySelector('#' + siteNameButton.getAttribute('aria-controls'));
-    navLinks=globalNavContent.querySelectorAll('.navbar-link')
-    navSublinks=globalNavContent.querySelectorAll('.navbar-link-submenu')
-    navContents=globalNavContent.querySelectorAll('.navbar-dropdown')
-    if (width < 1024) {
-        siteNameButton.setAttribute('aria-expanded', false);
-        siteNameButton.setAttribute('aria-disabled', false);
-        if(navLinks.length>0){
-          navLinks.forEach((l)=>{
-
-            l.setAttribute('aria-haspopup', false);
-            l.setAttribute('aria-expanded', false);
-            l.setAttribute('aria-controls', l.nextElementSibling.id);
-          })
-          if(navSublinks.length>0){
-            navSublinks.forEach((l)=>{  
-              l.setAttribute('aria-haspopup', false);
-            })
-          }
-          navContents.forEach((l)=>{
-            l.setAttribute('aria-labelledby', l.previousElementSibling.id);
-          })
-        }
-    }
-  }
 
   //Resize window
 
@@ -160,41 +346,14 @@ document.addEventListener('DOMContentLoaded', () => {
         navbarWhite.classList.remove('is-active')
         navbarWhite.removeAttribute('style')
       }
-      if(siteName){
-          siteNameButton.setAttribute('aria-expanded', true);
-          siteNameButton.setAttribute('aria-disabled', true);
-          siteNameButton.classList.remove('is-open')
-          globalNavContent.classList.remove('hide', 'show')
-          globalNavContent.removeAttribute('style');
-          if(navLinks.length>0){
-            navLinks.forEach((l)=>{  
-              l.setAttribute('aria-haspopup', true);
-              l.setAttribute('aria-expanded', true);
-              l.classList.remove('navbar-link-open');
-            })
-            navContents.forEach((l)=>{
-              l.removeAttribute('style');
-              l.classList.remove('is-active')
-            })
-          }
-          if(navSublinks.length>0){
-            navSublinks.forEach((l)=>{  
-              l.setAttribute('aria-haspopup', true);
-            })
-          }
-
-      }
+   
       if(blackNav){
         const navbarEnd = blackNav.querySelector('.navbar-end')
         if(navbarEnd&&navbarEnd.classList.contains('is-active')){
           navbarEnd.classList.remove('is-active')
         }
       }
-      if(findInfo){
-        if(findInfo&&findInfo.classList.contains('is-active')){
-          findInfo.classList.remove('is-active')
-        }
-      }
+      
       if ($navbarBurgers.length > 0) {
         $navbarBurgers.forEach((el) => {
           const hamburgerIcon = el.querySelector('.burger-icon')
@@ -204,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           if(closeIcon.getAttribute('class').indexOf('is-active') > -1){
             closeIcon.setAttribute('class', closeIcon.getAttribute('class').replace('is-active', ''));
-          }   
+          }
           if(hamburgerIcon.getAttribute('class').indexOf('is-hide') > -1){
             hamburgerIcon.setAttribute('class', hamburgerIcon.getAttribute('class').replace('is-hide', ''));
           } 
@@ -230,46 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
             l.setAttribute('aria-haspopup', false);
           })
         }
-        if(siteName){
-          const currAttr = window.getComputedStyle(globalNavContent).getPropertyValue('display');
-          if (currAttr !== "none") {
-            siteNameButton.setAttribute('aria-expanded', true);
-            siteNameButton.setAttribute('aria-disabled', false);
-            globalNavContent.style.height="auto"
-
-          }else{
-            siteNameButton.setAttribute('aria-expanded', false);
-            siteNameButton.setAttribute('aria-disabled', false);
-          }
-
-          const current= globalNavContent.querySelector('.navbar-item.active')
-          if(current && !current.parentElement.classList.contains('navbar-start')){
-            let link;
-            let content;
-            if(current.classList.contains('has-dropdown')){
-              if(current.classList.contains('submenu')){
-                link=current.parentElement.previousElementSibling
-                content=current.parentElement
-              }else{
-                link=current.querySelector('.navbar-link')
-                content=current.querySelector('.navbar-dropdown')
-
-              }
-            }else{
-              if(current.parentElement.classList.contains('navbar-dropdown-submenu')){
-                link=current.parentElement.parentElement.parentElement.previousElementSibling
-                content=current.parentElement.parentElement.parentElement
-              }else if(current.parentElement.classList.contains('navbar-dropdown')){
-                link=current.parentElement.previousElementSibling
-                content=current.parentElement
-              }
-            }
-            link.setAttribute('aria-expanded', true);
-            link.classList.add('navbar-link-open')
-            content.classList.add('is-active');
-            content.style.height="auto";
-          }
-        }
+       
         if($aside){
           const sidenavContentn= $aside.querySelector('.accordion__content')
           sidenavContentn.style.height="auto"
@@ -310,16 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
       $sideButton.setAttribute('aria-disabled', false);
     }
   }
-  if (siteName) {
-    //top level menu
-    const topitems = Array.prototype.slice.call(globalNavContent.querySelectorAll('.navbar-item:not(.submenu)'), 0)
-    //submenu
-    const subitems = Array.prototype.slice.call(globalNavContent.querySelectorAll('.submenu'), 0)
-    const dropdowns=Array.prototype.slice.call(globalNavContent.querySelectorAll('.has-dropdown:not(.submenu)'), 0);
-    $navbar_topitems=[...topitems, ...$navbar_topitems]
-    $navbar_subitems=[...subitems, ...$navbar_subitems]
-    $outerSideDropdowns=[...dropdowns, ...$outerSideDropdowns]
-  }
+
   //child theme collapsed menu
   const collapsedNav=document.querySelector('.navbar-menu-expanded')
   if(collapsedNav){
@@ -434,7 +545,3 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
 })
-
-
-
-
