@@ -22,7 +22,6 @@ add_action('admin_enqueue_scripts', 'admin_scripts');
 add_action('admin_enqueue_scripts', 'admin_styles');
 
 //fontawesome
-
 function fontawesome() {
     wp_enqueue_style( 'load-fa', 'https://use.fontawesome.com/releases/v6.4.2/css/all.css' );
 }
