@@ -106,47 +106,58 @@ if (!function_exists('purdueBrand_widgets_init')) {
             ));
         }
         
-        //Footer widgets
+        register_sidebar(array(
+            'name'          => esc_html__('Footer signature', 'purdue'),
+            'id'            => 'footer-signature',
+            'description'   => esc_html__('Footer signature content', 'purdueBrand'),
+            'before_widget' => '<div id="%1$s" class="container is-fullhd %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '',
+            'after_title'   => '',
+        ));
 
-        register_sidebar(array(
-            'name'          => esc_html__('Footer links column 1', 'purdueBrand'),
-            'id'            => 'footer-column-1',
-            'description'   => esc_html__('Add a Footer Links Column widget here for the first link column on footer.', 'purdueBrand'),
-            'before_widget' => '<div id="%1$s" class="widget %2$s footer__links">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h2>',
-            'after_title'   => '</h2>',
-        ));
-        register_sidebar(array(
-            'name'          => esc_html__('Footer links column 2', 'purdueBrand'),
-            'id'            => 'footer-column-2',
-            'description'   => esc_html__('Add a Footer Links Column widget here for the second link column on footer.', 'purdueBrand'),
-            'before_widget' => '<div id="%1$s" class="widget %2$s footer__links">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h2>',
-            'after_title'   => '</h2>',
-        ));
-        register_sidebar(array(
-            'name'          => esc_html__('Footer links column 3', 'purdueBrand'),
-            'id'            => 'footer-column-3',
-            'description'   => esc_html__('Add a Footer Links Column widget here for the third link column on footer.', 'purdueBrand'),
-            'before_widget' => '<div id="%1$s" class="widget %2$s footer__links">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h2>',
-            'after_title'   => '</h2>',
-        ));
-        register_sidebar(array(
-            'name'          => esc_html__('Footer links column 4', 'purdueBrand'),
-            'id'            => 'footer-column-4',
-            'description'   => esc_html__('Add a Footer Links Column widget here for the fourth link column on footer.', 'purdueBrand'),
-            'before_widget' => '<div id="%1$s" class="widget %2$s footer__links">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h2>',
-            'after_title'   => '</h2>',
-        ));
+                //Footer widgets
+
+                register_sidebar(array(
+                    'name'          => esc_html__('Footer links column 1', 'purdueBrand'),
+                    'id'            => 'footer-column-1',
+                    'description'   => esc_html__('Add a Footer Links Column widget here for the first link column on footer.', 'purdueBrand'),
+                    'before_widget' => '<div id="%1$s" class="widget %2$s footer__links">',
+                    'after_widget'  => '</div>',
+                    'before_title'  => '<h2>',
+                    'after_title'   => '</h2>',
+                ));
+                register_sidebar(array(
+                    'name'          => esc_html__('Footer links column 2', 'purdueBrand'),
+                    'id'            => 'footer-column-2',
+                    'description'   => esc_html__('Add a Footer Links Column widget here for the second link column on footer.', 'purdueBrand'),
+                    'before_widget' => '<div id="%1$s" class="widget %2$s footer__links">',
+                    'after_widget'  => '</div>',
+                    'before_title'  => '<h2>',
+                    'after_title'   => '</h2>',
+                ));
+                register_sidebar(array(
+                    'name'          => esc_html__('Footer links column 3', 'purdueBrand'),
+                    'id'            => 'footer-column-3',
+                    'description'   => esc_html__('Add a Footer Links Column widget here for the third link column on footer.', 'purdueBrand'),
+                    'before_widget' => '<div id="%1$s" class="widget %2$s footer__links">',
+                    'after_widget'  => '</div>',
+                    'before_title'  => '<h2>',
+                    'after_title'   => '</h2>',
+                ));
+                register_sidebar(array(
+                    'name'          => esc_html__('Footer links column 4', 'purdueBrand'),
+                    'id'            => 'footer-column-4',
+                    'description'   => esc_html__('Add a Footer Links Column widget here for the fourth link column on footer.', 'purdueBrand'),
+                    'before_widget' => '<div id="%1$s" class="widget %2$s footer__links">',
+                    'after_widget'  => '</div>',
+                    'before_title'  => '<h2>',
+                    'after_title'   => '</h2>',
+                ));
     }
 }
 add_action('widgets_init', 'purdueBrand_widgets_init');
+
 
 if (!function_exists('register_relatedContent_widget')) {
     function register_relatedContent_widget()
@@ -609,7 +620,18 @@ class LinksColumn_Widget extends WP_Widget {
 		
 		if ( $title ) {
            
-			echo $args['before_title'] .'<button class="accordion__heading accordion__heading--footer" aria-expanded="true" aria-disabled="true" id="accordion'.$no.'id" aria-controls="sect'.$no.'">'. $title .'<i aria-hidden="true" class="fas fa-plus accordion__icon accordion__icon__plus"></i><i aria-hidden="true" class="fas fa-minus accordion__icon accordion__icon__minus"></i></button>'. $args['after_title'];
+			echo $args['before_title'] .'<button class="accordion__heading accordion__heading--footer" aria-expanded="true" aria-disabled="true" id="accordion'.$no.'id" aria-controls="sect'.$no.'">'.$title.'
+            <svg aria-hidden="true" class="accordion__icon accordion__icon__plus" width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>plus_icon</title>
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g stroke="#cfb991" stroke-width="4">
+                        <circle cx="26" cy="26" r="24"></circle>
+                        <line x1="26.5" y1="14" x2="26.5" y2="38" stroke-linecap="round" stroke-linejoin="round"></line>
+                        <line x1="25.6896552" y1="14.5116279" x2="25.6896552" y2="38.6976744" stroke-linecap="round" stroke-linejoin="round" transform="translate(25.6897, 26.6047) rotate(-90) translate(-25.6897, -26.6047)"></line>
+                    </g>
+                </g>
+            </svg>
+            </button>'. $args['after_title'];
         }
 
         echo '<ul class="accordion__content--footer" id="sect'.$no.'" aria-labelledby="accordion'.$no.'id">';
