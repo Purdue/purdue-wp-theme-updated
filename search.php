@@ -104,7 +104,7 @@
 						<h3 class="search-post-title"><?php the_title() ?></h3>
 						<p class="search-post-link"><?php the_permalink() ?></p>
 						<p  class="search-post-content">
-						<?php purdue_get_excerpt(); ?>
+						<?php echo purdue_get_excerpt(get_the_content());  ?>
 						</p>
 					</a>	
 				<?php 
