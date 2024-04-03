@@ -11,8 +11,8 @@
 
  $customCSS = "";
  if (function_exists('get_field')) {	
-	 $customCSS = get_field('custom_styles');
- }
+	$customCSS = wp_strip_all_tags(html_entity_decode(get_field('custom_styles')));
+}
  $headerSetting = "global";
  if(get_theme_mod( 'header_layout_settings' ) == "simple"){
 	 $headerSetting = "simple";
