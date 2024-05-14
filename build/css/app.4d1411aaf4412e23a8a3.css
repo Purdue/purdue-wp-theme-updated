@@ -15679,6 +15679,11 @@ ul.wp-block-latest-posts.wp-block-latest-posts__list.is-grid.columns-2 li {
   }
 }
 
+.page404-desc,
+.page404-header {
+  text-align: center;
+}
+
 .alert-widget {
   background: #daaa00;
   font-family: acumin-pro, "Franklin Gothic", sans-serif;
