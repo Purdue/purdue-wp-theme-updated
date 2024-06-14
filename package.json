@@ -1,6 +1,6 @@
 {
   "name": "purdue-wp-theme",
-  "version": "1.0.4",
+  "version": "1.8.1",
   "description": "Purdue Wordpress Theme",
   "main": "index.js",
   "scripts": {
