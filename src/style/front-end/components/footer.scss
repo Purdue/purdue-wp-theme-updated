@@ -47,6 +47,20 @@ body.custom-background {
         text-decoration: none;
       }
     }
+    a.purdue-home-button, a.wp-block-button__link.wp-element-button{  
+      color: $black;
+      text-decoration: none;
+      &:hover {
+        color: $white;
+        text-decoration: none;
+      }
+      &.purdue-home-button--black{
+        color: $white;
+        &:hover{
+          color: $black;
+        }
+      }
+    }
     .footer__global__resources {
       padding-bottom: 3rem;
       position: relative;
@@ -257,6 +271,9 @@ body.custom-background {
               height: 80px;
             }
           }
+        }
+        a.purdue-home-button, a.wp-block-button__link.wp-element-button{ 
+          display: flex; 
         }
         &__address {
           margin-bottom: 1.5rem;

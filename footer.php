@@ -108,17 +108,8 @@
 										?>
 										</p>
 										<div class="navbar-item contact-info__campuses mobile-show">
-										<div class="purdue-accordion dropdown-style accordion--campus">
-											<button class="accordion__heading" aria-expanded="false" aria-controls="campus-menu-mobile">
-											OUR CAMPUSES
-											</button>
-											<ul id="campus-menu-mobile" class="accordion__content">
-											<li><a href="https://www.purdue.edu/campuses/indianapolis/" rel="noopener" target="_blank">Purdue University in Indianapolis</a></li>
-													<li><a href="https://purdue.edu/online" rel="noopener" target="_blank">Purdue University Online</a></li>
-													<li><a href="https://www.purdueglobal.edu/" rel="noopener" target="_blank">Purdue Global</a></li>
-													<li><a href="https://www.pfw.edu/" rel="noopener" target="_blank">Purdue Fort Wayne</a></li>
-													<li><a href="https://www.pnw.edu/" rel="noopener" target="_blank">Purdue Northwest</a></li>
-											</ul>
+											<div class="purdue-accordion dropdown-style accordion--campus">
+												<a class="purdue-home-button purdue-home-button--black" href="/home/about/systemwide-campuses/" target="_self">Systemwide campuses</a>
 											</div>
 										</div>
 									</div>
@@ -206,18 +197,8 @@
 									<div class="column is-half-desktop">
 										<div class="contact-info__campuses navbar-item mobile-hidden">
 											<div class="purdue-accordion dropdown-style accordion--campus">
-												<button class="accordion__heading" aria-expanded="false" aria-controls="campus-menu">
-													OUR CAMPUSES
-												</button>
-												<ul id="campus-menu" class="accordion__content">
-													<li><a href="https://www.purdue.edu/campuses/indianapolis/" rel="noopener" target="_blank">Purdue University in Indianapolis</a></li>
-													<li><a href="https://purdue.edu/online" rel="noopener" target="_blank">Purdue University Online</a></li>
-													<li><a href="https://www.purdueglobal.edu/" rel="noopener" target="_blank">Purdue Global</a></li>
-													<li><a href="https://www.pfw.edu/" rel="noopener" target="_blank">Purdue Fort Wayne</a></li>
-													<li><a href="https://www.pnw.edu/" rel="noopener" target="_blank">Purdue Northwest</a></li>
-												</ul>
+												<a class="purdue-home-button purdue-home-button--black" href="/home/about/systemwide-campuses/" target="_self">Systemwide campuses</a>
 											</div>
-
 										</div>
 									</div>
 								</div>
