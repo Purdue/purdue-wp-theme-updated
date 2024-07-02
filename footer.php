@@ -109,7 +109,7 @@
 										</p>
 										<div class="navbar-item contact-info__campuses mobile-show">
 											<div class="purdue-accordion dropdown-style accordion--campus">
-												<a class="purdue-home-button purdue-home-button--black" href="/home/about/systemwide-campuses/" target="_self">Systemwide campuses</a>
+												<a class="purdue-home-button purdue-home-button--black" href="https://www.purdue.edu/home/about/systemwide-campuses/" target="_self">Systemwide campuses</a>
 											</div>
 										</div>
 									</div>
@@ -197,7 +197,7 @@
 									<div class="column is-half-desktop">
 										<div class="contact-info__campuses navbar-item mobile-hidden">
 											<div class="purdue-accordion dropdown-style accordion--campus">
-												<a class="purdue-home-button purdue-home-button--black" href="/home/about/systemwide-campuses/" target="_self">Systemwide campuses</a>
+												<a class="purdue-home-button purdue-home-button--black" href="https://www.purdue.edu/home/about/systemwide-campuses/" target="_self">Systemwide campuses</a>
 											</div>
 										</div>
 									</div>
