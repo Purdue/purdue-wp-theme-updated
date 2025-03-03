@@ -197,6 +197,10 @@ body.custom-background {
       font-family: $source-serif-pro;
       position: relative;
       z-index: 1;
+      p{
+        font-size: 0.875rem;
+        margin-bottom: 0;
+      }
       .container {
         border-top: 1px solid #c4bfc0;
         padding-top: 2rem;
