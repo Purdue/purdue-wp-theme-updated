@@ -45,7 +45,7 @@
 						<h2>Results for:
 						<?php 
 						if (isset($_GET['q'])){
-								echo wp_filter_nohtml_kses(sanitize_text_field($_GET['q']));
+								echo esc_html(wp_filter_nohtml_kses(sanitize_text_field($_GET['q'])));
 						}
 						?>
 						</h2>
@@ -76,7 +76,7 @@
 				<h2>Results for:
 				<?php 
 					if (isset($_GET['s'])){
-						echo wp_filter_nohtml_kses(sanitize_text_field($_GET['s']));
+						echo esc_html(wp_filter_nohtml_kses(sanitize_text_field($_GET['s'])));
 					}
 				?>
 				</h2>
